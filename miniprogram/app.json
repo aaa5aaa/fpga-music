@@ -1,0 +1,13 @@
+{
+  "pages": [
+    "pages/index/index"
+  ],
+  "window": {
+    "navigationBarTitleText": "ACG720 曲谱控制台",
+    "navigationBarBackgroundColor": "#0a1119",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#070d14"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

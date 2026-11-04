@@ -1,0 +1,113 @@
+<view class="page">
+  <view class="hero">
+    <view class="hero-glow"></view>
+    <view class="eyebrow">ACG720 SYNTH</view>
+    <view class="h1">曲谱控制台</view>
+    <view class="sub">导入 · 存储 · 录音</view>
+    <view class="chip {{connected ? 'chip-on' : ''}}">
+      <view class="chip-dot"></view>
+      <text>{{connected ? 'BLE 已连接' : 'BLE 未连接'}}</text>
+    </view>
+  </view>
+
+  <view class="status-card">
+    <view class="status-dot {{connected ? 'on' : ''}}"></view>
+    <text class="status-text">{{status}}</text>
+  </view>
+
+  <view class="disconnect-row" wx:if="{{connected}}">
+    <button class="btn danger" bindtap="disconnect">断开蓝牙</button>
+  </view>
+
+  <view class="card" wx:if="{{!connected}}">
+    <view class="card-head">
+      <text class="card-title">连接设备</text>
+    </view>
+    <button class="btn primary" bindtap="scan" disabled="{{!ready}}">扫描 ACG720</button>
+    <view class="dev-list" wx:if="{{devices.length}}">
+      <button
+        wx:for="{{devices}}"
+        wx:key="deviceId"
+        class="dev"
+        bindtap="connect"
+        data-id="{{item.deviceId}}"
+      >{{item.name}}</button>
+    </view>
+  </view>
+
+  <view class="card" wx:if="{{connected}}">
+    <view class="card-head">
+      <text class="card-title">曲库槽位</text>
+      <button class="mini" bindtap="requestList">刷新</button>
+    </view>
+    <view class="slot-grid">
+      <view
+        wx:for="{{slotCards}}"
+        wx:key="idx"
+        class="slot {{item.active ? 'active' : ''}} {{item.has ? 'used' : ''}}"
+        bindtap="selectSlot"
+        data-index="{{item.idx}}"
+      >
+        <view class="slot-top">
+          <text class="slot-no">{{item.no}}</text>
+          <view class="slot-dot"></view>
+        </view>
+        <text class="slot-name">{{item.has ? item.name : '空槽'}}</text>
+      </view>
+    </view>
+    <view class="slot-actions">
+      <button class="btn ghost" bindtap="loadSlot">加载</button>
+      <button class="btn ghost" bindtap="playStored">播放</button>
+      <button class="btn ghost" bindtap="stop">停止</button>
+      <button class="btn danger-ghost" bindtap="deleteSlot">删除</button>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="card-head">
+      <text class="card-title">导入曲谱</text>
+      <text class="card-hint">JSON</text>
+    </view>
+    <view class="file-box" wx:if="{{fileReady}}">
+      <view class="file-name">{{fileName}}</view>
+      <view class="file-meta">{{fileEvents}} 个事件 · 将保存到槽 {{slotNo}}</view>
+    </view>
+    <view class="file-box empty" wx:else>
+      <view class="file-name">尚未导入曲谱</view>
+      <view class="file-meta">选择 JSON 后发送到 FPGA</view>
+    </view>
+    <button class="btn primary" bindtap="importSong" disabled="{{!connected}}">选择 JSON 曲谱</button>
+    <button
+      class="btn success"
+      bindtap="saveToFlash"
+      disabled="{{!connected || !fileReady}}"
+    >保存到槽 {{slotNo}}</button>
+  </view>
+
+  <view class="card rec-card">
+    <view class="card-head">
+      <text class="card-title">录音</text>
+      <text class="card-hint">FPGA 实录</text>
+    </view>
+    <input
+      class="name-input"
+      value="{{recordName}}"
+      maxlength="16"
+      placeholder="录音名称（最多 5 个汉字）"
+      bindinput="onRecordName"
+    />
+    <view class="rec-line">
+      <view class="rec-dot {{recActive ? 'on' : ''}}"></view>
+      <text>{{recActive ? '录音中 · ' + recEvents + ' 事件' : '待机 · 槽 ' + slotNo}}</text>
+    </view>
+    <button
+      class="btn {{recActive ? 'danger' : 'record'}}"
+      bindtap="toggleRecord"
+      disabled="{{!connected}}"
+    >{{recActive ? '停止并保存' : '开始录音'}}</button>
+  </view>
+
+  <view class="tip">
+    需要先打开手机蓝牙。ESP32 同时只能连接一个中心设备；连接小程序时请先断开 PC。
+  </view>
+</view>
