@@ -1,0 +1,181 @@
+//Copyright (C)2014-2026 Gowin Semiconductor Corporation.
+//All rights reserved. 
+//File Title: Physical Constraints file
+//Tool Version: V1.9.12.04 (64-bit)
+//Part Number: GW5AT-LV60PG484AC1/I0
+//Device: GW5AT-60
+//Device Version: B
+//Created Time: Sun 10 18 18:49:19 2026
+
+IO_LOC "codec_dacdat" AA20;
+IO_PORT "codec_dacdat" IO_TYPE=LVCMOS33 PULL_MODE=NONE DRIVE=8 BANK_VCCIO=3.3;
+IO_LOC "codec_mclk" V20;
+IO_PORT "codec_mclk" IO_TYPE=LVCMOS33 PULL_MODE=NONE DRIVE=8 BANK_VCCIO=3.3;
+IO_LOC "codec_scl" M13;
+IO_PORT "codec_scl" IO_TYPE=LVCMOS33 PULL_MODE=NONE DRIVE=8 BANK_VCCIO=3.3;
+// ---- 诊断用 6 个 LED: leds[0]=D2(L21) ... leds[5]=D7(M21) ----------------
+// leds[0]=pll_locked  leds[1]=codec_ready  leds[2]=LRCK活动
+// leds[3]=有音频      leds[4]=test_mode    leds[5]=1Hz心跳
+IO_LOC "leds[0]" L21;
+IO_PORT "leds[0]" IO_TYPE=LVCMOS33 PULL_MODE=NONE DRIVE=8 BANK_VCCIO=3.3;
+IO_LOC "leds[1]" K21;
+IO_PORT "leds[1]" IO_TYPE=LVCMOS33 PULL_MODE=NONE DRIVE=8 BANK_VCCIO=3.3;
+IO_LOC "leds[2]" K22;
+IO_PORT "leds[2]" IO_TYPE=LVCMOS33 PULL_MODE=NONE DRIVE=8 BANK_VCCIO=3.3;
+IO_LOC "leds[3]" J22;
+IO_PORT "leds[3]" IO_TYPE=LVCMOS33 PULL_MODE=NONE DRIVE=8 BANK_VCCIO=3.3;
+IO_LOC "leds[4]" H22;
+IO_PORT "leds[4]" IO_TYPE=LVCMOS33 PULL_MODE=NONE DRIVE=8 BANK_VCCIO=3.3;
+IO_LOC "leds[5]" M21;
+IO_PORT "leds[5]" IO_TYPE=LVCMOS33 PULL_MODE=NONE DRIVE=8 BANK_VCCIO=3.3;
+IO_LOC "codec_sda" M16;
+IO_PORT "codec_sda" IO_TYPE=LVCMOS33 PULL_MODE=NONE DRIVE=8 BANK_VCCIO=3.3;
+// ---- 8 行 x 4 列 矩阵键盘 (32 键) ----------------------------------------
+// 按原工程 cst 的接法: 行 = A13/A14/A15/A16/A18/A19/F13/F14
+//                     列 = B13/C13/E14/E13
+// FPGA 驱动 4 根列线(低有效), 读取 8 根行线(开内部上拉)
+// 如果实际接线不同, 只改下面这 12 行即可
+IO_LOC "columns[3]" B13;
+IO_LOC "columns[2]" C13;
+IO_LOC "columns[1]" E14;
+IO_LOC "columns[0]" E13;
+IO_PORT "columns[3]" IO_TYPE=LVCMOS33 PULL_MODE=NONE DRIVE=8 BANK_VCCIO=3.3;
+IO_PORT "columns[2]" IO_TYPE=LVCMOS33 PULL_MODE=NONE DRIVE=8 BANK_VCCIO=3.3;
+IO_PORT "columns[1]" IO_TYPE=LVCMOS33 PULL_MODE=NONE DRIVE=8 BANK_VCCIO=3.3;
+IO_PORT "columns[0]" IO_TYPE=LVCMOS33 PULL_MODE=NONE DRIVE=8 BANK_VCCIO=3.3;
+
+IO_LOC "rows[7]" F14;
+IO_LOC "rows[6]" F13;
+IO_LOC "rows[5]" A19;
+IO_LOC "rows[4]" A18;
+IO_LOC "rows[3]" A16;
+IO_LOC "rows[2]" A15;
+IO_LOC "rows[1]" A14;
+IO_LOC "rows[0]" A13;
+IO_PORT "rows[7]" IO_TYPE=LVCMOS33 PULL_MODE=UP BANK_VCCIO=3.3;
+IO_PORT "rows[6]" IO_TYPE=LVCMOS33 PULL_MODE=UP BANK_VCCIO=3.3;
+IO_PORT "rows[5]" IO_TYPE=LVCMOS33 PULL_MODE=UP BANK_VCCIO=3.3;
+IO_PORT "rows[4]" IO_TYPE=LVCMOS33 PULL_MODE=UP BANK_VCCIO=3.3;
+IO_PORT "rows[3]" IO_TYPE=LVCMOS33 PULL_MODE=UP BANK_VCCIO=3.3;
+IO_PORT "rows[2]" IO_TYPE=LVCMOS33 PULL_MODE=UP BANK_VCCIO=3.3;
+IO_PORT "rows[1]" IO_TYPE=LVCMOS33 PULL_MODE=UP BANK_VCCIO=3.3;
+IO_PORT "rows[0]" IO_TYPE=LVCMOS33 PULL_MODE=UP BANK_VCCIO=3.3;
+
+// I2S: v5 起 FPGA 是主机, BCLK/LRCK 也是输出
+IO_LOC "codec_lrck" W20;
+IO_PORT "codec_lrck" IO_TYPE=LVCMOS33 PULL_MODE=NONE DRIVE=8 BANK_VCCIO=3.3;
+IO_LOC "codec_bclk" U20;
+IO_PORT "codec_bclk" IO_TYPE=LVCMOS33 PULL_MODE=NONE DRIVE=8 BANK_VCCIO=3.3;
+IO_LOC "sw_n[7]" B22;
+IO_PORT "sw_n[7]" IO_TYPE=LVCMOS33 PULL_MODE=NONE BANK_VCCIO=3.3;
+IO_LOC "sw_n[6]" C22;
+IO_PORT "sw_n[6]" IO_TYPE=LVCMOS33 PULL_MODE=NONE BANK_VCCIO=3.3;
+IO_LOC "sw_n[5]" D21;
+IO_PORT "sw_n[5]" IO_TYPE=LVCMOS33 PULL_MODE=NONE BANK_VCCIO=3.3;
+IO_LOC "sw_n[4]" E21;
+IO_PORT "sw_n[4]" IO_TYPE=LVCMOS33 PULL_MODE=NONE BANK_VCCIO=3.3;
+IO_LOC "sw_n[3]" G21;
+IO_PORT "sw_n[3]" IO_TYPE=LVCMOS33 PULL_MODE=NONE BANK_VCCIO=3.3;
+IO_LOC "sw_n[2]" E22;
+IO_PORT "sw_n[2]" IO_TYPE=LVCMOS33 PULL_MODE=NONE BANK_VCCIO=3.3;
+IO_LOC "sw_n[1]" D22;
+IO_PORT "sw_n[1]" IO_TYPE=LVCMOS33 PULL_MODE=NONE BANK_VCCIO=3.3;
+IO_LOC "sw_n[0]" G22;
+IO_PORT "sw_n[0]" IO_TYPE=LVCMOS33 PULL_MODE=NONE BANK_VCCIO=3.3;
+IO_LOC "reset_n" F15;
+IO_PORT "reset_n" IO_TYPE=LVCMOS33 PULL_MODE=NONE BANK_VCCIO=3.3;
+// ---- 外接 4 键功能模块: S1=颤音 S2=滑音 S3=合唱 S4=延迟 (低有效) ----
+// 模块 5 针: VCC / GND / S1 / S2 / S3 / S4 中的 4 根信号 + 公共端
+// 引脚若与你的排针不对应, 只改下面 4 行 IO_LOC 即可
+IO_LOC "func_btn_n[0]" F16;
+IO_LOC "func_btn_n[1]" F18;
+IO_LOC "func_btn_n[2]" F19;
+IO_LOC "func_btn_n[3]" F20;
+IO_PORT "func_btn_n[0]" IO_TYPE=LVCMOS33 PULL_MODE=UP BANK_VCCIO=3.3;
+IO_PORT "func_btn_n[1]" IO_TYPE=LVCMOS33 PULL_MODE=UP BANK_VCCIO=3.3;
+IO_PORT "func_btn_n[2]" IO_TYPE=LVCMOS33 PULL_MODE=UP BANK_VCCIO=3.3;
+IO_PORT "func_btn_n[3]" IO_TYPE=LVCMOS33 PULL_MODE=UP BANK_VCCIO=3.3;
+
+IO_LOC "clk_50m" Y18;
+IO_PORT "clk_50m" IO_TYPE=LVCMOS33 PULL_MODE=NONE BANK_VCCIO=3.3;
+
+// ---- BLE 模块 UART (ESP32-C3) --------------------------------------------
+//   模块 TXD -> D14, 模块 RXD -> D15, 模块 STATE -> C14 (可选)
+//   模块供电必须 3.3V (ESP32-C3 可从扩展口 5V 取电再自己稳压)
+IO_LOC "bt_rx" D14;
+IO_PORT "bt_rx" IO_TYPE=LVCMOS33 PULL_MODE=UP BANK_VCCIO=3.3;
+IO_LOC "bt_tx" D15;
+IO_PORT "bt_tx" IO_TYPE=LVCMOS33 PULL_MODE=NONE DRIVE=8 BANK_VCCIO=3.3;
+IO_LOC "bt_state" C14;
+IO_PORT "bt_state" IO_TYPE=LVCMOS33 PULL_MODE=DOWN BANK_VCCIO=3.3;
+
+// ---- 板载 USB-UART (J21/M15), PC 调试/兜底 --------------------------------
+IO_LOC "dbg_rx" J21;
+IO_PORT "dbg_rx" IO_TYPE=LVCMOS33 PULL_MODE=UP BANK_VCCIO=3.3;
+IO_LOC "dbg_tx" M15;
+IO_PORT "dbg_tx" IO_TYPE=LVCMOS33 PULL_MODE=NONE DRIVE=8 BANK_VCCIO=3.3;
+
+// ---- EC11 音量旋钮 (A/B 相 + 按下, 按下本版未使用) -----------------------
+//   EC11 公共端接 GND, A/B 直接上 FPGA; 模块若带板载上拉, VCC 接 3.3V
+IO_LOC "rot_a" B16;
+IO_PORT "rot_a" IO_TYPE=LVCMOS33 PULL_MODE=UP BANK_VCCIO=3.3;
+IO_LOC "rot_b" E16;
+IO_PORT "rot_b" IO_TYPE=LVCMOS33 PULL_MODE=UP BANK_VCCIO=3.3;
+IO_LOC "rot_sw" E17;
+IO_PORT "rot_sw" IO_TYPE=LVCMOS33 PULL_MODE=UP BANK_VCCIO=3.3;
+
+// ---- 74HC595 8 位数码管 (测试) -------------------------------------------
+IO_LOC "seg7_dio" M18;
+IO_PORT "seg7_dio" IO_TYPE=LVCMOS33 PULL_MODE=NONE DRIVE=8 BANK_VCCIO=3.3;
+IO_LOC "seg7_sclk" F4;
+IO_PORT "seg7_sclk" IO_TYPE=LVCMOS33 PULL_MODE=NONE DRIVE=8 BANK_VCCIO=3.3;
+IO_LOC "seg7_rclk" C2;
+IO_PORT "seg7_rclk" IO_TYPE=LVCMOS33 PULL_MODE=NONE DRIVE=8 BANK_VCCIO=3.3;
+
+// ---- 板载 ADC128S102 (引脚固定, 不要改) ----
+IO_LOC "adc_cs_n" M6;
+IO_LOC "adc_din"  M5;
+IO_LOC "adc_sclk" N5;
+IO_LOC "adc_dout" P6;
+IO_PORT "adc_cs_n" IO_TYPE=LVCMOS33 DRIVE=8 PULL_MODE=UP BANK_VCCIO=3.3;
+IO_PORT "adc_din"  IO_TYPE=LVCMOS33 DRIVE=8 PULL_MODE=UP BANK_VCCIO=3.3;
+IO_PORT "adc_sclk" IO_TYPE=LVCMOS33 DRIVE=8 PULL_MODE=UP BANK_VCCIO=3.3;
+IO_PORT "adc_dout" IO_TYPE=LVCMOS33 PULL_MODE=UP BANK_VCCIO=3.3;
+
+// ---- 调试脚: 有音频时输出高电平 (示波器测延迟用) ----
+
+// ---- LCD SPI (2.4" ILI9341) ----
+IO_LOC "lcd_cs" B18;
+IO_PORT "lcd_cs" IO_TYPE=LVCMOS33 DRIVE=8 BANK_VCCIO=3.3;
+IO_LOC "lcd_rst" C19;
+IO_PORT "lcd_rst" IO_TYPE=LVCMOS33 DRIVE=8 BANK_VCCIO=3.3;
+IO_LOC "lcd_dc" C18;
+IO_PORT "lcd_dc" IO_TYPE=LVCMOS33 DRIVE=8 BANK_VCCIO=3.3;
+IO_LOC "lcd_mosi" B17;
+IO_PORT "lcd_mosi" IO_TYPE=LVCMOS33 DRIVE=8 BANK_VCCIO=3.3;
+IO_LOC "lcd_sck" D17;
+IO_PORT "lcd_sck" IO_TYPE=LVCMOS33 DRIVE=8 BANK_VCCIO=3.3;
+
+// ---- 板载 S1: 四页切换 (低有效, 上拉) ----
+IO_LOC "key_s1" A20;
+IO_PORT "key_s1" IO_TYPE=LVCMOS33 PULL_MODE=UP BANK_VCCIO=3.3;
+// ---- 板载 S2: 播放/停止已存曲目 (低有效, 上拉) ----
+IO_LOC "key_s2" B20;
+IO_PORT "key_s2" IO_TYPE=LVCMOS33 PULL_MODE=UP BANK_VCCIO=3.3;
+// ---- 板载 S3: 录音开始/停止 (低有效, 上拉) ----
+IO_LOC "key_s3" A21;
+IO_PORT "key_s3" IO_TYPE=LVCMOS33 PULL_MODE=UP BANK_VCCIO=3.3;
+
+// ---- W25Q64 SPI Flash (ID 测试) ----
+IO_LOC "flash_cs" D16;
+IO_PORT "flash_cs" IO_TYPE=LVCMOS33 DRIVE=8 PULL_MODE=UP BANK_VCCIO=3.3;
+IO_LOC "flash_sclk" C17;
+IO_PORT "flash_sclk" IO_TYPE=LVCMOS33 DRIVE=8 PULL_MODE=NONE BANK_VCCIO=3.3;
+IO_LOC "flash_mosi" C15;
+IO_PORT "flash_mosi" IO_TYPE=LVCMOS33 DRIVE=8 PULL_MODE=NONE BANK_VCCIO=3.3;
+IO_LOC "flash_miso" B15;
+IO_PORT "flash_miso" IO_TYPE=LVCMOS33 PULL_MODE=UP BANK_VCCIO=3.3;
+
+// ---- WS2812B 灯带数据线 (绿线) ----
+IO_LOC "ws2812_din" C20;
+IO_PORT "ws2812_din" IO_TYPE=LVCMOS33 DRIVE=8 PULL_MODE=NONE BANK_VCCIO=3.3;
